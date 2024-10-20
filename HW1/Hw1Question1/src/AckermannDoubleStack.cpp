@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>  // 引入時間測量的標頭檔案
 using namespace std;
 
 const int STACK_SIZE = 50000;  // 設定一個足夠大的堆疊空間
@@ -48,17 +49,34 @@ int AckermannDoubleStack(int m, int n) {
 int main()
 {
     int m, n;
+
     // 循環讀取 m 和 n 的值
     while (cin >> m >> n)
     {
-        cout << "Ackermann Double Stack: " << AckermannDoubleStack(m, n) << endl; // 輸出結果
+        // 開始計時
+        auto start = chrono::high_resolution_clock::now();
+
+      
+        int result = AckermannDoubleStack(m, n);
+
+        // 停止計時
+        auto end = chrono::high_resolution_clock::now();
+
+        // 計算執行時間
+        chrono::duration<double> duration = end - start;
+
+        // 輸出結果和執行時間
+        cout << "Ackermann Double Stack: " << result << endl;
+        cout << "Execution time: " << duration.count() << " seconds" << endl;
     }
+
     return 0;
 }
+
 /*
 最大承受測資
     ˙測資(3,12)=32765
 
 STACK_SIZE堆疊大小對應可承受測資
-    ˙50000 -> (3,12) = 32765
+    ˙[50000] --> (3,12) = 32765
 */

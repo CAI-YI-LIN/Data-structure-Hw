@@ -1,4 +1,5 @@
-#include<iostream>
+#include <iostream>
+#include <chrono>  // 引入時間測量的標頭檔案
 using namespace std;
 
 const int STACK_SIZE = 250000; // 定義堆疊的大小
@@ -6,7 +7,7 @@ const int STACK_SIZE = 250000; // 定義堆疊的大小
 // 用一個陣列模擬堆疊的 Ackermann 非遞迴函式
 int AckermannSingleStack(int m, int n)
 {
-    int stack_m[STACK_SIZE]; // 使用陣列模擬堆疊，大小可以根據需求調整
+    int stack_m[STACK_SIZE]; // 使用陣列模擬堆疊
     int top = 0; // 堆疊頂指標
     stack_m[top] = m; // 將初始 m 推入堆疊
 
@@ -36,13 +37,29 @@ int AckermannSingleStack(int m, int n)
 int main()
 {
     int m, n;
+
     // 循環讀取 m 和 n 的值
     while (cin >> m >> n)
     {
-        cout << "Ackermann Single Stack: " << AckermannSingleStack(m, n) << endl; // 輸出結果
+        // 開始計時
+        auto start = chrono::high_resolution_clock::now();
+
+        int result = AckermannSingleStack(m, n); // 執行計算
+
+        // 停止計時
+        auto end = chrono::high_resolution_clock::now();
+
+        // 計算執行時間
+        chrono::duration<double> duration = end - start;
+
+        // 輸出結果和執行時間
+        cout << "Ackermann Single Stack: " << result << endl;
+        cout << "Execution time: " << duration.count() << " seconds" << endl;
     }
+
     return 0;
 }
+
 /*
 可執行測資
     ˙測資(3,13)=65533
